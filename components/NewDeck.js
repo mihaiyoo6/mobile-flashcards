@@ -1,11 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity
+} from 'react-native';
+import { addDeck } from '../actions';
+import { saveDeckTitle } from '../utils/api';
 
-export default class NewDeck extends React.Component {
+class NewDeck extends React.Component {
+  state = {
+    text: ''
+  }
+  onPress = () => {
+    console.log('this.state', this);
+    this.props.addDeck(this.state.text);
+    saveDeckTitle(this.state.text);
+    this.setState({ text: '' })
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up NewDeck.js to start working on your NewDeck!</Text>
+        <Text>What is the title of your new deck?</Text>
+        <TextInput placeholder='Title'
+          onChangeText={text => this.setState({ text })} />
+        <TouchableOpacity onPress={this.onPress}>
+          <Text>SUBMIT</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -19,3 +42,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addDeck: deck => dispatch(addDeck(deck))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NewDeck)

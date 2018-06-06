@@ -1,12 +1,18 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, StatusBar } from 'react-native';
 import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation';
+import { Constants } from 'expo';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import DeckList from './components/DeckList';
-import NewDeck from './components/NewDeck';
+import DeckStack from './components/DeckStack';
+import NewItemsStack from './components/NewItemsStack';
+import reducer from './reducers';
+
 
 // class DetailsScreen extends React.Component {
 //   render() {
@@ -63,19 +69,26 @@ import NewDeck from './components/NewDeck';
 //   Settings: SettingsScreen,
 //   Details: DetailsScreen,
 // });
+function UdaciStatusBar({ backgroundColor, ...props }) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
-export default createBottomTabNavigator({
-  DeckList: DeckList,
-  NewDeck: NewDeck,
+const Tabs = createBottomTabNavigator({
+  DeckStack: DeckStack,
+  NewItemsStack: NewItemsStack,
 },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'DeckList') {
+        if (routeName === 'DeckStack') {
           iconName = `cards${focused ? '' : '-outline'}`;
-        } else if (routeName === 'NewDeck') {
+        } else if (routeName === 'NewItemsStack') {
           iconName = 'cards-variant';
         }
 
@@ -89,3 +102,22 @@ export default createBottomTabNavigator({
       inactiveTintColor: 'gray',
     },
   });
+
+
+
+const store = createStore(
+  reducer,
+  applyMiddleware(logger)
+);
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <UdaciStatusBar backgroundColor='gray' barStyle="light-content" />
+          <Tabs />
+        </View>
+      </Provider>
+    )
+  }
+}
