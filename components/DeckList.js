@@ -42,7 +42,7 @@ class DeckList extends React.Component {
             <Text>{decks[key].questions.length} cards</Text>
             <Button
               title="See Deck"
-              onPress={() => this.props.navigation.navigate('Deck')}
+              onPress={() => this.props.navigation.navigate('Deck', { ...decks[key] })}
             />
           </View>
         )}

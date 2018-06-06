@@ -1,6 +1,7 @@
 import {
   ADD_DECK,
-  RECEIVE_DECKS
+  RECEIVE_DECKS,
+  ADD_QUESTION
 } from '../actions';
 
 // const initialState = {
@@ -42,6 +43,20 @@ export default function (state = {}, action) {
       return {
         ...state,
         ...action.decks
+      }
+    case ADD_QUESTION:
+      return {
+        ...state,
+        [action.deck]: {
+          ...state[action.deck],
+          questions: [
+            ...state[action.deck].questions,
+            {
+              question: action.question,
+              answer: action.answer
+            }
+          ]
+        }
       }
   }
 }

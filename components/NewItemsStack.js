@@ -10,7 +10,7 @@ const NewItemsNav = createStackNavigator({
   NewQuestion: {
     screen: NewQuestion,
     navigationOptions: props => ({
-      title: 'Add new question'
+      title: 'Add new Card'
     })
   }
 });

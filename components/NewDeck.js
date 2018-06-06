@@ -15,7 +15,6 @@ class NewDeck extends React.Component {
     text: ''
   }
   onPress = () => {
-    console.log('this.state', this);
     this.props.addDeck(this.state.text);
     saveDeckTitle(this.state.text);
     this.setState({ text: '' })
