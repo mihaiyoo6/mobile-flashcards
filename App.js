@@ -9,8 +9,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import DeckStack from './components/DeckStack';
-import NewItemsStack from './components/NewItemsStack';
+import StackNav from './components/StackNav';
+import NewDeck from './components/NewDeck';
 import reducer from './reducers';
 import { setLocalNotification } from './utils/helpers';
 
@@ -79,17 +79,17 @@ import { setLocalNotification } from './utils/helpers';
 // }
 
 const Tabs = createBottomTabNavigator({
-  DeckStack: DeckStack,
-  NewItemsStack: NewItemsStack,
+  StackNav: StackNav,
+  NewDeck: NewDeck,
 },
   {
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'DeckStack') {
+        if (routeName === 'StackNav') {
           iconName = `cards${focused ? '' : '-outline'}`;
-        } else if (routeName === 'NewItemsStack') {
+        } else if (routeName === 'NewDeck') {
           iconName = 'cards-variant';
         }
 

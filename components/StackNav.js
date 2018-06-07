@@ -3,10 +3,15 @@ import { createStackNavigator } from 'react-navigation';
 import DeckList from './DeckList';
 import Deck from './Deck';
 import Quiz from './Quiz';
+// import NewDeck from './NewDeck';
+import NewQuestion from './NewQuestion';
 
-const deckNav = createStackNavigator({
+const stackNav = createStackNavigator({
   DeckList: {
     screen: DeckList,
+    navigationOptions: props => ({
+      title: 'Your decks'
+    })
   },
   Deck: {
     screen: Deck,
@@ -19,7 +24,13 @@ const deckNav = createStackNavigator({
     navigationOptions: props => ({
       title: 'Quiz Page'
     })
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: props => ({
+      title: 'New Card'
+    })
   }
 });
 
-export default deckNav;
+export default stackNav;

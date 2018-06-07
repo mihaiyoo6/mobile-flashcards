@@ -12,10 +12,12 @@ export default class Deck extends React.Component {
           title="Add New Question"
           onPress={() => this.props.navigation.navigate('NewQuestion', { deck })}
         />
-        <Button
-          title="Start Quiz"
-          onPress={() => this.props.navigation.navigate('Quiz', { deck, questions })}
-        />
+        {questions.length > 0 &&
+          <Button
+            title="Start Quiz"
+            onPress={() => this.props.navigation.navigate('Quiz', { deck, questions })}
+          />
+        }
       </View>
     );
   }

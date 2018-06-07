@@ -18,6 +18,7 @@ class NewDeck extends React.Component {
     this.props.addDeck(this.state.text);
     saveDeckTitle(this.state.text);
     this.setState({ text: '' })
+    this.props.navigation.navigate('DeckList');
   }
   render() {
     return (

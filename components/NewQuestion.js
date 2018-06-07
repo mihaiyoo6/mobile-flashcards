@@ -9,12 +9,14 @@ class NewQuestion extends React.Component {
     question: '',
     answer: ''
   }
-  onPress = () => {
+  onPress = redirect => {
     const { deck } = this.props.navigation.state.params;
     this.props.addQuestion({ ...this.state, deck });
     addCardToDeck({ ...this.state, deck }).then(() => {
       this.setState({ question: '', answer: '' })
+      redirect && this.props.navigation.navigate('DeckList');
     });
+
   }
   render() {
     return (
@@ -28,8 +30,11 @@ class NewQuestion extends React.Component {
         <TextInput placeholder='Answer'
           value={this.state.answer}
           onChangeText={answer => this.setState({ answer })} />
-        <TouchableOpacity onPress={this.onPress}>
-          <Text>SUBMIT</Text>
+        <TouchableOpacity onPress={() => this.onPress(true)}>
+          <Text>Save</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.onPress(false)}>
+          <Text>Save & Add New</Text>
         </TouchableOpacity>
       </View>
     );
