@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 class Quiz extends React.Component {
   state = {
@@ -15,6 +16,8 @@ class Quiz extends React.Component {
   }
   handleCorrect = qindex => {
     if (qindex >= this.state.questions.length - 1) {
+      clearLocalNotification()
+        .then(setLocalNotification)
       return this.setState({
         finished: true,
         questionIndex: this.state.questions.length,
@@ -28,6 +31,8 @@ class Quiz extends React.Component {
   }
   handleIncorrect = qindex => {
     if (qindex >= this.state.questions.length - 1) {
+      clearLocalNotification()
+        .then(setLocalNotification)
       return this.setState({
         finished: true,
         questionIndex: this.state.questions.length
@@ -44,7 +49,7 @@ class Quiz extends React.Component {
         <Text>{deck} Quiz has {questions.length} questions</Text>
         <Text>Correct Answers {correctAnswers}</Text>
         {finished
-          ? <Text> Congrats, you finished you quiz</Text>
+          ? <Text> Congrats, you finished your quiz</Text>
           : <View>
             <Text>{questionIndex}/{questions.length}</Text>
             <Text>{questions[questionIndex].question}</Text>

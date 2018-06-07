@@ -12,6 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import DeckStack from './components/DeckStack';
 import NewItemsStack from './components/NewItemsStack';
 import reducer from './reducers';
+import { setLocalNotification } from './utils/helpers';
 
 
 // class DetailsScreen extends React.Component {
@@ -110,6 +111,9 @@ const store = createStore(
   applyMiddleware(logger)
 );
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={store}>
