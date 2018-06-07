@@ -24,6 +24,7 @@ class NewDeck extends React.Component {
       <View style={styles.container}>
         <Text>What is the title of your new deck?</Text>
         <TextInput placeholder='Title'
+          value={this.state.text}
           onChangeText={text => this.setState({ text })} />
         <TouchableOpacity onPress={this.onPress}>
           <Text>SUBMIT</Text>

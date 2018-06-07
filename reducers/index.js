@@ -53,7 +53,8 @@ export default function (state = {}, action) {
             ...state[action.deck].questions,
             {
               question: action.question,
-              answer: action.answer
+              answer: action.answer,
+              showAnswer: false
             }
           ]
         }

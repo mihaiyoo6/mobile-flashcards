@@ -17,7 +17,6 @@ class DeckList extends React.Component {
     ).then(() => this.setState({ loading: false }));
   }
   render() {
-    console.log(this);
     if (this.state.loading) {
       return <AppLoading />
     }

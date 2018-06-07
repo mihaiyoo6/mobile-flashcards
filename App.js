@@ -69,13 +69,13 @@ import reducer from './reducers';
 //   Settings: SettingsScreen,
 //   Details: DetailsScreen,
 // });
-function UdaciStatusBar({ backgroundColor, ...props }) {
-  return (
-    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
-    </View>
-  )
-}
+// function UdaciStatusBar({ backgroundColor, ...props }) {
+//   return (
+//     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+//       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+//     </View>
+//   )
+// }
 
 const Tabs = createBottomTabNavigator({
   DeckStack: DeckStack,
@@ -114,7 +114,6 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
-          <UdaciStatusBar backgroundColor='gray' barStyle="light-content" />
           <Tabs />
         </View>
       </Provider>

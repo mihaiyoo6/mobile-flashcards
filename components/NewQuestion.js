@@ -12,8 +12,7 @@ class NewQuestion extends React.Component {
   onPress = () => {
     const { deck } = this.props.navigation.state.params;
     this.props.addQuestion({ ...this.state, deck });
-    addCardToDeck({ ...this.state, deck }).then(result => {
-      console.log('result', result);
+    addCardToDeck({ ...this.state, deck }).then(() => {
       this.setState({ question: '', answer: '' })
     });
   }
@@ -23,9 +22,11 @@ class NewQuestion extends React.Component {
         <Text>Open up NewQuestion.js to start working on your NewQuestion!</Text>
         <Text>Insert your question</Text>
         <TextInput placeholder='Question'
+          value={this.state.question}
           onChangeText={question => this.setState({ question })} />
         <Text>Insert your answer</Text>
         <TextInput placeholder='Answer'
+          value={this.state.answer}
           onChangeText={answer => this.setState({ answer })} />
         <TouchableOpacity onPress={this.onPress}>
           <Text>SUBMIT</Text>

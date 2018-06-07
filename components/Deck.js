@@ -3,18 +3,18 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default class Deck extends React.Component {
   render() {
-    const { title } = this.props.navigation.state.params;
+    const { title: deck, questions } = this.props.navigation.state.params;
 
     return (
       <View style={styles.container}>
         <Text>Open up Deck.js to start working on your Deck!</Text>
         <Button
           title="Add New Question"
-          onPress={() => this.props.navigation.navigate('NewQuestion', { deck: title })}
+          onPress={() => this.props.navigation.navigate('NewQuestion', { deck })}
         />
         <Button
           title="Start Quiz"
-          onPress={() => this.props.navigation.navigate('Quiz')}
+          onPress={() => this.props.navigation.navigate('Quiz', { deck, questions })}
         />
       </View>
     );
