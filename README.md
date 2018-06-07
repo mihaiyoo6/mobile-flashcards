@@ -5,9 +5,9 @@ For the UdaciCards project, you will build a mobile application (Android or iOS 
 
 Clone repository
 
- `cd mobile-flashcards/`
- `yarn install` or `npm install`
- `yarn start` or `npm start`
+ - ```cd mobile-flashcards/```
+ - ```yarn install``` or ```npm install```
+ - ```yarn start``` or ```npm start```
 
  Application tested only on IOS emulator
 
