@@ -42,6 +42,14 @@ class Quiz extends React.Component {
       questionIndex: this.state.questionIndex + 1
     })
   }
+  restartQuiz = () => {
+    this.setState({
+      questionIndex: 0,
+      correctAnswers: 0,
+      finished: false,
+      questions: this.props.questions
+    })
+  }
   render() {
     const { deck, questions, questionIndex, correctAnswers, finished } = this.state;
     return (
@@ -49,11 +57,16 @@ class Quiz extends React.Component {
         <Text>{deck} Quiz has {questions.length} questions</Text>
         <Text>Correct Answers {correctAnswers}</Text>
         {finished
-          ? <Text> Congrats, you finished your quiz</Text>
+          ? <View>
+            <Text> Congrats, you finished your quiz</Text>
+            <TouchableOpacity onPress={() => this.restartQuiz()}>
+              <Text>Restart Quiz</Text>
+            </TouchableOpacity>
+          </View>
           : <View>
             <Text>{questionIndex}/{questions.length}</Text>
-            <Text>{questions[questionIndex].question}</Text>
-            {questions[questionIndex].showAnswer && <Text>{questions[questionIndex].answer}</Text>}
+            <Text>Q: {questions[questionIndex].question}</Text>
+            {questions[questionIndex].showAnswer && <Text>A: {questions[questionIndex].answer}</Text>}
             <TouchableOpacity onPress={() => this.showAnswer(questionIndex)}>
               <Text>Show Answer</Text>
             </TouchableOpacity>

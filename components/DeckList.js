@@ -1,5 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  FlatList
+} from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo'
 import { getDecks } from '../utils/api';
@@ -35,7 +41,22 @@ class DeckList extends React.Component {
 
     return (
       <View style={styles.container}>
-        {keys.map(key =>
+        <FlatList
+          data={keys}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => {
+            return (<View>
+              <Text>{decks[item].title}</Text>
+              <Text>{decks[item].questions.length} cards</Text>
+              <Button
+                title="See Deck"
+                onPress={() => this.props.navigation.navigate('Deck', { ...decks[item] })}
+              />
+            </View>)
+          }
+          }
+        />
+        {/* {keys.map(key =>
           <View key={key}>
             <Text>{decks[key].title}</Text>
             <Text>{decks[key].questions.length} cards</Text>
@@ -44,7 +65,7 @@ class DeckList extends React.Component {
               onPress={() => this.props.navigation.navigate('Deck', { ...decks[key] })}
             />
           </View>
-        )}
+        )} */}
       </View>
     )
   }

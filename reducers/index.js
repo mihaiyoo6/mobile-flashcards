@@ -45,7 +45,6 @@ export default function (state = {}, action) {
         ...action.decks
       }
     case ADD_QUESTION:
-      console.log('action', action);
       return {
         ...state,
         [action.deck]: {
