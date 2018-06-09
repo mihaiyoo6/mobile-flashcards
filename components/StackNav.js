@@ -15,8 +15,8 @@ const stackNav = createStackNavigator({
   },
   Deck: {
     screen: Deck,
-    navigationOptions: props => ({
-      title: 'Deck Page'
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.title
     })
   },
   Quiz: {

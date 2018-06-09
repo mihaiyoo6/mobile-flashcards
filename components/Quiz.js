@@ -64,7 +64,7 @@ class Quiz extends React.Component {
             </TouchableOpacity>
           </View>
           : <View>
-            <Text>{questionIndex}/{questions.length}</Text>
+            <Text>{questionIndex + 1}/{questions.length}</Text>
             <Text>Q: {questions[questionIndex].question}</Text>
             {questions[questionIndex].showAnswer && <Text>A: {questions[questionIndex].answer}</Text>}
             <TouchableOpacity onPress={() => this.showAnswer(questionIndex)}>
