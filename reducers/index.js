@@ -4,32 +4,32 @@ import {
   ADD_QUESTION
 } from '../actions';
 
-// const initialState = {
-//   React: {
-//     title: 'React',
-//     questions: [
-//       {
-//         question: 'What is React?',
-//         answer: 'A library for managing user interfaces'
-//       },
-//       {
-//         question: 'Where do you make Ajax requests in React?',
-//         answer: 'The componentDidMount lifecycle event'
-//       }
-//     ]
-//   },
-//   JavaScript: {
-//     title: 'JavaScript',
-//     questions: [
-//       {
-//         question: 'What is a closure?',
-//         answer: 'The combination of a function and the lexical environment within which that function was declared.'
-//       }
-//     ]
-//   }
-// }
+const initialState = {
+  React: {
+    title: 'React',
+    questions: [
+      {
+        question: 'What is React?',
+        answer: 'A library for managing user interfaces'
+      },
+      {
+        question: 'Where do you make Ajax requests in React?',
+        answer: 'The componentDidMount lifecycle event'
+      }
+    ]
+  },
+  JavaScript: {
+    title: 'JavaScript',
+    questions: [
+      {
+        question: 'What is a closure?',
+        answer: 'The combination of a function and the lexical environment within which that function was declared.'
+      }
+    ]
+  }
+}
 
-export default function (state = {}, action) {
+export default function (state, action) {
   switch (action.type) {
     case ADD_DECK:
       return {
@@ -45,18 +45,23 @@ export default function (state = {}, action) {
         ...action.decks
       }
     case ADD_QUESTION:
+      const questions = state[action.deck]
+        ? [...state[action.deck].questions, {
+          question: action.question,
+          answer: action.answer,
+          showAnswer: false
+        }]
+        : [{
+          question: action.question,
+          answer: action.answer,
+          showAnswer: false
+        }];
+
       return {
         ...state,
         [action.deck]: {
           ...state[action.deck],
-          questions: [
-            ...state[action.deck].questions,
-            {
-              question: action.question,
-              answer: action.answer,
-              showAnswer: false
-            }
-          ]
+          questions
         }
       }
   }

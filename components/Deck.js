@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default class Deck extends React.Component {
+class Deck extends React.Component {
   render() {
-    const { title: deck, questions } = this.props.navigation.state.params;
+    console.log('props', this.props);
+    const { title: deck, questions } = this.props;
 
     return (
       <View style={styles.container}>
@@ -22,6 +24,13 @@ export default class Deck extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state, { navigation }) {
+  const { title } = navigation.state.params;
+  return state[title] || { title, questions: [] };
+}
+
+export default connect(mapStateToProps)(Deck);
 
 const styles = StyleSheet.create({
   container: {

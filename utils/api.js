@@ -23,6 +23,7 @@ export const STORAGE_KEY = 'mobile-flashcards';
 // }
 
 export function getDecks() {
+  AsyncStorage.clear();
   return AsyncStorage.getItem(STORAGE_KEY)
     .then(result => {
       return JSON.parse(result)

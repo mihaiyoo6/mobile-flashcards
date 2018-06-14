@@ -16,10 +16,10 @@ class NewDeck extends React.Component {
   }
   onPress = () => {
     const title = this.state.text;
-    this.props.addDeck();
+    this.props.addDeck(title);
     saveDeckTitle(title);
     this.setState({ text: '' });
-    this.props.navigation.navigate('Deck', { title, questions: [] });
+    this.props.navigation.navigate('Deck', { title });
   }
   render() {
     return (

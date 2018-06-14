@@ -62,6 +62,9 @@ class Quiz extends React.Component {
             <TouchableOpacity onPress={() => this.restartQuiz()}>
               <Text>Restart Quiz</Text>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Deck', { title: deck })}>
+              <Text>Go back to deck</Text>
+            </TouchableOpacity>
           </View>
           : <View>
             <Text>{questionIndex + 1}/{questions.length}</Text>
